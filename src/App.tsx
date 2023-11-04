@@ -4,6 +4,9 @@ import { Home } from "./components/home/main/home";
 import { Signup } from "./components/Signup/Signup";
 import { Login } from "./components/Login/Login";
 import { Header } from "./components/header/main/header";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <>
@@ -21,6 +24,18 @@ function App() {
           </main>
         </div>
       </Router>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

@@ -34,8 +34,7 @@ export const Signup = () => {
     const Toastid = toast.loading("Loading...");
 
     try {
-      console.log(URLS.BACKEND);
-      await axios.post(`${URLS.BACKEND}/user/register`, {
+      await axios.post(`${URLS.BACKEND}/user/register/`, {
         first_name: inputFormSignUp.name,
         last_name: inputFormSignUp.last_name,
         email: inputFormSignUp.email,

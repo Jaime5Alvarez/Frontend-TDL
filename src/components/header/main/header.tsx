@@ -12,7 +12,7 @@ export const Header = () => {
         <div className="ml-1 flex items-center ">
           <div
             onClick={() => Router.goToHome()}
-            className="font-bold text-lg ml-2 text-blue-800 max-w-md  bg-white rounded-full px-2 py-1 drop-shadow-lg"
+            className="font-bold text-lg ml-2 cursor-pointer text-blue-800 max-w-md  bg-white rounded-full px-2 py-1 drop-shadow-lg"
           >
             <img alt="Virtus Logo" src={Logo} className="w-20  " />{" "}
           </div>
