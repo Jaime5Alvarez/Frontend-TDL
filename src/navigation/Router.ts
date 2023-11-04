@@ -8,4 +8,5 @@ export const setNavigator = (n: NavigateFunction) => {
 export const Router = {
   goToLogin: () => navigator("/login", { replace: true }),
   goToSignUp: () => navigator("/signup", { replace: true }),
+  goToHome: () => navigator("/", { replace: true }),
 };
