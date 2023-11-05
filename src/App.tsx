@@ -1,11 +1,17 @@
 import "./App.css";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import { Home } from "./components/home/main/home";
 import { Signup } from "./components/Signup/Signup";
 import { Login } from "./components/Login/Login";
 import { Header } from "./components/header/main/header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { VerifyEmail } from "./components/verify-Email/VerifyEmail";
 
 function App() {
   return (
@@ -20,6 +26,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/user/email-verify/" element={<VerifyEmail />} />
             </Routes>
           </main>
         </div>

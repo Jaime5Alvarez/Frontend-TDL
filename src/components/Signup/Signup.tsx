@@ -1,9 +1,9 @@
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { URLS } from "../../application/urls";
 import { Router, setNavigator } from "../../navigation/Router";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -41,9 +41,9 @@ export const Signup = () => {
         password: inputFormSignUp.password,
       });
 
-      Router.goToHome();
+      Router.goToLogin();
       toast.update(Toastid, {
-        render: "Trainer account created",
+        render: "Trainer created, check your email",
         type: "success",
         autoClose: 5000,
         closeButton: true,

@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { PrimaryButton } from "../../buttons/PrimaryButton";
 import { Router, setNavigator } from "../../../navigation/Router";
 import { SecondaryButton } from "../../buttons/SecondaryButton";
 import Logo from "../../../assets/VIRTUS_transparentazo-removebg-preview.png";
+import { useNavigate } from "react-router-dom";
 export const Header = () => {
   const navigate = useNavigate();
   setNavigator(navigate);
