@@ -1,17 +1,14 @@
 import "./App.css";
-import {
-  Route,
-  BrowserRouter as Router,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Home } from "./components/home/main/home";
-import { Signup } from "./components/Signup/Signup";
-import { Login } from "./components/Login/Login";
+import { Signup } from "./authentication/Signup/Signup";
+import { Login } from "./authentication/Login/Login";
 import { Header } from "./components/header/main/header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { VerifyEmail } from "./components/verify-Email/VerifyEmail";
+import { VerifyEmail } from "./authentication/verify-Email/VerifyEmail";
+import { ResetPasswordClient } from "./authentication/Reset-password/reset-password";
+import { ErrorPage } from "./application/screens/ErrorPage";
 
 function App() {
   return (
@@ -27,6 +24,8 @@ function App() {
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
               <Route path="/user/email-verify/" element={<VerifyEmail />} />
+              <Route path="/reset-password" element={<ResetPasswordClient />} />
+              <Route path="*" element={<ErrorPage />} />
             </Routes>
           </main>
         </div>

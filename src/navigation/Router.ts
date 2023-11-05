@@ -9,4 +9,5 @@ export const Router = {
   goToLogin: () => navigator("/login", { replace: true }),
   goToSignUp: () => navigator("/signup", { replace: true }),
   goToHome: () => navigator("/", { replace: true }),
+  goToResetPassword: () => navigator("/reset-password", { replace: true }),
 };

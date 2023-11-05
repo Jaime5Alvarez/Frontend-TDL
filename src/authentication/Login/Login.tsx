@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { URLS } from "../../application/urls";
 import { Router, setNavigator } from "../../navigation/Router";
-
+interface Errorbody {
+  message: string;
+}
 export const Login = () => {
   const navigate = useNavigate();
   setNavigator(navigate);
@@ -28,14 +30,13 @@ export const Login = () => {
     const Toastid = toast.loading("Loading...");
 
     try {
-      const response = await axios.post(`${URLS.BACKEND}/user/login`, {
+      const response = await axios.post(`${URLS.BACKEND}/user/login/`, {
         email: inputForm.email,
         password: inputForm.password,
       });
-      const token = response.data.data.access_token;
-      const role = response.data.data.role;
+
+      const token = response.data.access;
       window.localStorage.setItem("token", token);
-      window.localStorage.setItem("role", role);
 
       Router.goToHome();
 
@@ -47,8 +48,9 @@ export const Login = () => {
         isLoading: false,
       });
     } catch (error) {
+      const e = error as AxiosError<Errorbody>;
       toast.update(Toastid, {
-        render: "Error logging in",
+        render: e.response?.data.message,
         type: "error",
         autoClose: 5000,
         closeButton: true,
@@ -115,7 +117,7 @@ export const Login = () => {
                 <p className="text-sm font-light text-gray-500 ">
                   Have you forgotten your password?
                   <a
-                    onClick={() => navigate("/trainer/reset-password")}
+                    onClick={() => Router.goToResetPassword()}
                     className="font-medium text-primary-600 hover:underline"
                   >
                     {""} Reset here
