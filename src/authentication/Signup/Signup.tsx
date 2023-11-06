@@ -1,9 +1,10 @@
 import axios, { AxiosError } from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { URLS } from "../../application/urls";
 import { Router, setNavigator } from "../../navigation/Router";
 import { useNavigate } from "react-router-dom";
+import { isAuth } from "../../application/IsAuth";
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -61,7 +62,9 @@ export const Signup = () => {
       });
     }
   };
-
+  useEffect(() => {
+    isAuth() && Router.goToHome();
+  }, []);
   return (
     <>
       <section className=" ">

@@ -3,6 +3,7 @@ import { Router, setNavigator } from "../../../navigation/Router";
 import { SecondaryButton } from "../../buttons/SecondaryButton";
 import Logo from "../../../assets/VIRTUS_transparentazo-removebg-preview.png";
 import { useNavigate } from "react-router-dom";
+import { isAuth } from "../../../application/IsAuth";
 export const Header = () => {
   const navigate = useNavigate();
   setNavigator(navigate);
@@ -17,10 +18,22 @@ export const Header = () => {
             <img alt="Virtus Logo" src={Logo} className="w-20  " />{" "}
           </div>
         </div>
-        <div className="mx-2 flex gap-2">
-          <PrimaryButton text="Login" action={() => Router.goToLogin()} />
-          <SecondaryButton text="Signup" action={() => Router.goToSignUp()} />
-        </div>
+        {isAuth() ? (
+          <div className="mx-5">
+            <PrimaryButton
+              text="Logout"
+              action={() => {
+                localStorage.clear();
+                Router.goToHome();
+              }}
+            />
+          </div>
+        ) : (
+          <div className="mx-2 flex gap-2">
+            <PrimaryButton text="Login" action={() => Router.goToLogin()} />
+            <SecondaryButton text="Signup" action={() => Router.goToSignUp()} />
+          </div>
+        )}
       </section>
     </>
   );

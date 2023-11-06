@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { URLS } from "../../application/urls";
 import { Router, setNavigator } from "../../navigation/Router";
+import { isAuth } from "../../application/IsAuth";
 interface Errorbody {
   message: string;
 }
@@ -60,7 +61,9 @@ export const Login = () => {
       console.log(err.response?.data);
     }
   };
-
+  useEffect(() => {
+    isAuth() && Router.goToHome();
+  }, []);
   return (
     <>
       <section className="">

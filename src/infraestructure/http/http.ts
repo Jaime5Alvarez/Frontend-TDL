@@ -1,5 +1,6 @@
 import axios from "axios";
 import { URLS } from "../../application/urls";
+import { getToken } from "../../application/GetToken";
 
 export const http = {
   resetPassword: async ({ email }: { email: string }) => {
@@ -20,5 +21,14 @@ export const http = {
         password,
       }
     );
+  },
+  getTodos: async () => {
+    const res = await axios.get(`${URLS.BACKEND}/todos/get-todos/`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+    return res.data;
   },
 };
