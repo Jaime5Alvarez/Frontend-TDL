@@ -1,6 +1,11 @@
 import axios from "axios";
 import { URLS } from "../../utils/urls";
 import { getToken } from "../../utils/GetToken";
+export const avoidTokenVerificationPath: string[] = [
+  "login",
+  "signup",
+  "reset-password",
+];
 
 export const http = {
   resetPassword: async ({ email }: { email: string }) => {

@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { VerifyEmail } from "./authentication/verify-Email/VerifyEmail";
 import { ResetPasswordClient } from "./authentication/Reset-password/reset-password";
 import { ErrorPage } from "./screens/ErrorPage";
+import { Logout } from "./authentication/Logout/logout";
+
 function App() {
   return (
     <>
@@ -24,6 +26,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/user/email-verify/" element={<VerifyEmail />} />
               <Route path="/reset-password" element={<ResetPasswordClient />} />
+              <Route path="/logout" element={<Logout />} />
               <Route path="*" element={<ErrorPage />} />
             </Routes>
           </main>

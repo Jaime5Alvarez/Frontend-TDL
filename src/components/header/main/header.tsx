@@ -23,8 +23,7 @@ export const Header = () => {
             <PrimaryButton
               text="Logout"
               action={() => {
-                localStorage.clear();
-                Router.goToHome();
+                Router.goToLogout();
               }}
             />
           </div>
