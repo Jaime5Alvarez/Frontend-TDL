@@ -3,6 +3,7 @@ import { http } from "../../../infraestructure/http/http";
 import { Todos } from "../../../domain/models";
 
 export const TodoView = () => {
+  const [date, setDate] = useState(new Date()); // Establecer la fecha actual
   const [todos, setTodos] = useState<Todos[] | []>([]);
   const getTodos = async () => {
     try {
@@ -18,11 +19,14 @@ export const TodoView = () => {
   }, []);
   return (
     <>
-      <div>
-        {todos.map((todo, index) => {
-          return <div key={index}>{todo.title}</div>;
-        })}
-      </div>
+      <section>
+        <h3>{date.toDateString()}</h3>
+        <div>
+          {todos.map((todo, index) => {
+            return <div key={index}>{todo.title}</div>;
+          })}
+        </div>
+      </section>
     </>
   );
 };

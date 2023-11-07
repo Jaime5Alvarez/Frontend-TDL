@@ -1,3 +1,3 @@
 export const isAuth = () => {
-  return !!localStorage.getItem("token");
+  return !!localStorage.getItem("access_token");
 };
