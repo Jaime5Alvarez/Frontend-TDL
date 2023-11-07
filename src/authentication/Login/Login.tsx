@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { URLS } from "../../application/urls";
+import { URLS } from "../../utils/urls";
 import { Router, setNavigator } from "../../navigation/Router";
-import { isAuth } from "../../application/IsAuth";
+import { isAuth } from "../../utils/IsAuth";
 interface Errorbody {
   message: string;
 }

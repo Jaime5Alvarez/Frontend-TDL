@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { LoadingSpinner } from "../../application/screens/LoadingSpinner";
+import { LoadingSpinner } from "../../screens/LoadingSpinner";
 import axios from "axios";
-import { URLS } from "../../application/urls";
+import { URLS } from "../../utils/urls";
 import { toast } from "react-toastify";
 import { Router } from "../../navigation/Router";
 export const VerifyEmail = () => {

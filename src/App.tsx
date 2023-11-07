@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { VerifyEmail } from "./authentication/verify-Email/VerifyEmail";
 import { ResetPasswordClient } from "./authentication/Reset-password/reset-password";
-import { ErrorPage } from "./application/screens/ErrorPage";
+import { ErrorPage } from "./screens/ErrorPage";
 
 function App() {
   return (

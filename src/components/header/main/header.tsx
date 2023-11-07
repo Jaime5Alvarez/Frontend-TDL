@@ -3,7 +3,7 @@ import { Router, setNavigator } from "../../../navigation/Router";
 import { SecondaryButton } from "../../buttons/SecondaryButton";
 import Logo from "../../../assets/VIRTUS_transparentazo-removebg-preview.png";
 import { useNavigate } from "react-router-dom";
-import { isAuth } from "../../../application/IsAuth";
+import { isAuth } from "../../../utils/IsAuth";
 export const Header = () => {
   const navigate = useNavigate();
   setNavigator(navigate);

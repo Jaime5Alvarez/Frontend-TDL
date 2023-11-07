@@ -1,6 +1,6 @@
 import axios from "axios";
-import { URLS } from "../../application/urls";
-import { getToken } from "../../application/GetToken";
+import { URLS } from "../../utils/urls";
+import { getToken } from "../../utils/GetToken";
 
 export const http = {
   resetPassword: async ({ email }: { email: string }) => {

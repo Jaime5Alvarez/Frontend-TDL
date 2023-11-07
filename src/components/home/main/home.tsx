@@ -1,4 +1,4 @@
-import { isAuth } from "../../../application/IsAuth";
+import { isAuth } from "../../../utils/IsAuth";
 import { LandingPage } from "../LandingPage";
 import { TodoView } from "./todoview";
 
