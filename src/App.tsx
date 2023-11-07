@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <Router>
-        <nav>
+        <nav className=" flex justify-center">
           <Header />
         </nav>
         <main className="pt-20">

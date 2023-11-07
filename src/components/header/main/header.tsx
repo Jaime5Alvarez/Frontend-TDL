@@ -12,7 +12,7 @@ export const Header = () => {
   return (
     <>
       <section
-        className={`bg-gray-50 fixed z-10 w-11/12 h-16 rounded-full  mt-3 mx-4 flex items-center justify-between`}
+        className={`bg-gray-50 fixed z-10 w-11/12 h-16  rounded-full  mt-3  flex items-center justify-between`}
       >
         <div className="ml-1 flex items-center ">
           <div
