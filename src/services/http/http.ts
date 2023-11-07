@@ -1,10 +1,10 @@
 import axios from "axios";
 import { URLS } from "../../utils/urls";
-import { getToken } from "../../utils/GetToken";
 export const avoidTokenVerificationPath: string[] = [
-  "login",
+  "/user/login/",
   "signup",
   "reset-password",
+  "email-verify",
 ];
 
 export const http = {
@@ -58,12 +58,7 @@ export const http = {
     );
   },
   getTodos: async () => {
-    const res = await axios.get(`${URLS.BACKEND}/todos/get-todos/`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
+    const res = await axios.get(`${URLS.BACKEND}/todos/get-todos/`);
     return res.data;
   },
 };

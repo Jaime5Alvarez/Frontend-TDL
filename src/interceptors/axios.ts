@@ -12,8 +12,11 @@ export const AxiosInterceptor = () => {
     return request;
   };
   axios.interceptors.request.use((request: any) => {
-    if (request.url && avoidTokenVerificationPath?.includes(request.url)) {
-      console.log(true);
+    const shouldExclude = avoidTokenVerificationPath.some(
+      (path) => request.url && request.url.includes(path)
+    );
+    if (shouldExclude) {
+      return request;
     }
     return updateHeader(request);
   });
