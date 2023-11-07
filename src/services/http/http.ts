@@ -1,9 +1,7 @@
 import axios from "axios";
 import { URLS } from "../../utils/urls";
+import { api } from "../../interceptors/axios";
 
-export const api = axios.create({
-  baseURL: URLS.BACKEND,
-});
 export const http = {
   resetPassword: async ({ email }: { email: string }) => {
     await axios.post(`${URLS.BACKEND}/user/reset-password/`, { email });

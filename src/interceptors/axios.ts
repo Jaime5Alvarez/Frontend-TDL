@@ -3,8 +3,9 @@ import axios from "axios";
 import { URLS } from "../utils/urls";
 import { getAccessToken, getRefreshToken } from "../utils/GetToken";
 import { Router } from "../navigation/Router";
-import { api } from "../services/http/http";
-
+export const api = axios.create({
+  baseURL: URLS.BACKEND,
+});
 export const AxiosInterceptor = () => {
   api.interceptors.request.use(
     (config) => {
