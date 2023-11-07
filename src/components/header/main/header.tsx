@@ -6,10 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { isAuth } from "../../../utils/IsAuth";
 export const Header = () => {
   const navigate = useNavigate();
+
   setNavigator(navigate);
+
   return (
     <>
-      <section className="bg-gray-300 bg-opacity-20 h-16 rounded-full  mt-3 mx-4 flex items-center justify-between">
+      <section
+        className={`bg-gray-50 fixed z-10 w-11/12 h-16 rounded-full  mt-3 mx-4 flex items-center justify-between`}
+      >
         <div className="ml-1 flex items-center ">
           <div
             onClick={() => Router.goToHome()}

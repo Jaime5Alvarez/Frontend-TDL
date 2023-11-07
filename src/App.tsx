@@ -15,22 +15,20 @@ function App() {
   return (
     <>
       <Router>
-        <div className="h-screen bg-white">
-          <nav>
-            <Header />
-          </nav>
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/user/email-verify/" element={<VerifyEmail />} />
-              <Route path="/reset-password" element={<ResetPasswordClient />} />
-              <Route path="/logout" element={<Logout />} />
-              <Route path="*" element={<ErrorPage />} />
-            </Routes>
-          </main>
-        </div>
+        <nav>
+          <Header />
+        </nav>
+        <main className="pt-20">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/user/email-verify/" element={<VerifyEmail />} />
+            <Route path="/reset-password" element={<ResetPasswordClient />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+        </main>
       </Router>
       <ToastContainer
         position="bottom-right"

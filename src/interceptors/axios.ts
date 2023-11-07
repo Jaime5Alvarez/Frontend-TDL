@@ -41,7 +41,9 @@ export const AxiosInterceptor = () => {
           // Retry the original request with the new token
           originalRequest.headers.Authorization = `Bearer ${access}`;
           return axios(originalRequest);
-        } catch (error) {}
+        } catch (error) {
+          console.log("ee");
+        }
       }
 
       return Promise.reject(error);
