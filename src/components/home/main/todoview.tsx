@@ -3,7 +3,7 @@ import { Todos } from "../../../models/models";
 import { http } from "../../../services/http/http";
 
 export const TodoView = () => {
-  const [date, setDate] = useState(new Date()); // Establecer la fecha actual
+  const [date, setDate] = useState(new Date());
   const [todos, setTodos] = useState<Todos[] | []>([]);
   const getTodos = async () => {
     try {
