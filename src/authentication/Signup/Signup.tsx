@@ -1,10 +1,10 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { URLS } from "../../utils/urls";
 import { Router, setNavigator } from "../../navigation/Router";
 import { useNavigate } from "react-router-dom";
 import { isAuth } from "../../utils/IsAuth";
+import { http } from "../../services/http/http";
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ export const Signup = () => {
     const Toastid = toast.loading("Loading...");
 
     try {
-      await axios.post(`${URLS.BACKEND}/user/register/`, {
+      await http.SignUp({
         first_name: inputFormSignUp.name,
         last_name: inputFormSignUp.last_name,
         email: inputFormSignUp.email,

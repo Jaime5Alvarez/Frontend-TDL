@@ -13,7 +13,7 @@ export const AxiosInterceptor = () => {
   };
   axios.interceptors.request.use((request: any) => {
     if (request.url && avoidTokenVerificationPath?.includes(request.url)) {
-      return request;
+      console.log(true);
     }
     return updateHeader(request);
   });

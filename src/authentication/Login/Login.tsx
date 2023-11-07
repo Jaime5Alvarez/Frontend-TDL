@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { URLS } from "../../utils/urls";
 import { Router, setNavigator } from "../../navigation/Router";
 import { isAuth } from "../../utils/IsAuth";
+import { http } from "../../services/http/http";
+import { AxiosError } from "axios";
 interface Errorbody {
   message: string;
 }
@@ -31,14 +31,14 @@ export const Login = () => {
     const Toastid = toast.loading("Loading...");
 
     try {
-      const response = await axios.post(`${URLS.BACKEND}/user/login/`, {
+      const response = await http.Login({
         email: inputForm.email,
         password: inputForm.password,
       });
 
       localStorage.clear();
-      window.localStorage.setItem("access_token", response.data.access);
-      window.localStorage.setItem("refresh_token", response.data.access);
+      window.localStorage.setItem("access_token", response.access);
+      window.localStorage.setItem("refresh_token", response.access);
 
       Router.goToHome();
 
