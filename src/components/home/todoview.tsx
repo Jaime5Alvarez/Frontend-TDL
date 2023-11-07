@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { useGetTodos } from "../hooks/getTodos";
+import { AddTodoIcon } from "../icons/AddTodo";
 
 export const TodoView = () => {
   const [date, setDate] = useState(new Date());
@@ -24,6 +25,9 @@ export const TodoView = () => {
 
   return (
     <>
+      <button className="absolute bottom-6 right-8 z-10 bg-white text-blue-800 rounded-full px-2 py-2">
+        <AddTodoIcon className="w-8 h-8" />
+      </button>
       <section className=" flex justify-center translate-y-5 w-full ">
         <div className="bg-white drop-shadow-2xl w-8/12 rounded-lg p-5 text-center relative ">
           <div className="flex justify-between items-center mb-3">
