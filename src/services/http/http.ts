@@ -1,13 +1,9 @@
 import axios from "axios";
 import { URLS } from "../../utils/urls";
-export const avoidTokenVerificationPath: string[] = [
-  "/user/login/",
-  "signup",
-  "reset-password",
-  "email-verify",
-  "token",
-];
 
+export const api = axios.create({
+  baseURL: URLS.BACKEND,
+});
 export const http = {
   resetPassword: async ({ email }: { email: string }) => {
     await axios.post(`${URLS.BACKEND}/user/reset-password/`, { email });
@@ -59,7 +55,7 @@ export const http = {
     );
   },
   getTodos: async () => {
-    const res = await axios.get(`${URLS.BACKEND}/todos/get-todos/`);
+    const res = await api.get(`/todos/get-todos/`);
     return res.data;
   },
 };

@@ -2,9 +2,11 @@ import axios from "axios";
 
 import { URLS } from "../utils/urls";
 import { getAccessToken, getRefreshToken } from "../utils/GetToken";
+import { Router } from "../navigation/Router";
+import { api } from "../services/http/http";
 
 export const AxiosInterceptor = () => {
-  axios.interceptors.request.use(
+  api.interceptors.request.use(
     (config) => {
       const token = getAccessToken();
       if (token) {
@@ -15,7 +17,7 @@ export const AxiosInterceptor = () => {
     (error) => Promise.reject(error)
   );
   // Add a response interceptor
-  axios.interceptors.response.use(
+  api.interceptors.response.use(
     (response) => response,
     async (error) => {
       const originalRequest = error.config;
@@ -32,7 +34,6 @@ export const AxiosInterceptor = () => {
               refresh: refreshToken,
             }
           );
-          console.log("Despues de la solicitud");
 
           const { access } = response.data;
 
@@ -42,7 +43,9 @@ export const AxiosInterceptor = () => {
           originalRequest.headers.Authorization = `Bearer ${access}`;
           return axios(originalRequest);
         } catch (error) {
-          console.log("ee");
+          localStorage.clear();
+          Router.goToLogin();
+          return;
         }
       }
 
