@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { http } from "../../../infraestructure/http/http";
 import { Todos } from "../../../models/models";
+import { http } from "../../../services/http/http";
 
 export const TodoView = () => {
   const [date, setDate] = useState(new Date()); // Establecer la fecha actual

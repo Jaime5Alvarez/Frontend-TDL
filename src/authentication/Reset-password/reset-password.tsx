@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { http } from "../../infraestructure/http/http";
+import { http } from "../../services/http/http";
 
 export const ResetPasswordClient = () => {
   const [inputForm, setInputForm] = useState({
