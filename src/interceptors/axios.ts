@@ -20,4 +20,13 @@ export const AxiosInterceptor = () => {
     }
     return updateHeader(request);
   });
+  axios.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      console.log(error);
+      return Promise.reject(error);
+    }
+  );
 };
