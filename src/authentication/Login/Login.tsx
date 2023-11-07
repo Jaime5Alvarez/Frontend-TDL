@@ -38,7 +38,7 @@ export const Login = () => {
 
       localStorage.clear();
       window.localStorage.setItem("access_token", response.access);
-      window.localStorage.setItem("refresh_token", response.access);
+      window.localStorage.setItem("refresh_token", response.refresh);
 
       Router.goToHome();
 

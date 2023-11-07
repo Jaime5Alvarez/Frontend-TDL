@@ -5,6 +5,7 @@ export const avoidTokenVerificationPath: string[] = [
   "signup",
   "reset-password",
   "email-verify",
+  "token",
 ];
 
 export const http = {
