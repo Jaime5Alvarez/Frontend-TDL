@@ -4,3 +4,6 @@ export interface Todos {
   completed: boolean;
   date: string;
 }
+export type ErrorBody = {
+  message: string;
+};

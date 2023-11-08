@@ -6,9 +6,8 @@ import { toast } from "react-toastify";
 import { Modal } from "../modals/modal";
 import { http } from "../../services/http/http";
 import { AxiosError } from "axios";
-export type ErrorBody = {
-  message: string;
-};
+import { ErrorBody } from "../../models/models";
+
 export const TodoView = () => {
   const { todos, setTodos } = useGetTodos();
 
@@ -82,7 +81,7 @@ export const TodoView = () => {
       {modal && (
         <Modal setClose={setModal} onOpen={resetInputForm}>
           <form className="" onSubmit={HandleSubmitAddTask}>
-            <h3 className="text-blue-800 text-xl font-bold1">ADD A TASK</h3>
+            <h3 className="text-blue-800 text-xl font-bold">ADD A TASK</h3>
             <hr />
             <div className="mt-3">
               <label className="block mb-2 text-sm font-medium text-gray-900 ">
