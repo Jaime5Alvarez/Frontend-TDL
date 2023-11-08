@@ -60,4 +60,22 @@ export const http = {
     const res = await api.post(`/todos/add-todos/`, { title, date });
     return res;
   },
+  editTodo: async ({
+    id,
+    title,
+    date,
+    completed,
+  }: {
+    id: string;
+    title: string;
+    date: string;
+    completed: boolean;
+  }) => {
+    const res = await api.put(`/todos/edit-todos/${id}/`, {
+      title,
+      date,
+      completed,
+    });
+    return res;
+  },
 };
