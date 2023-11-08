@@ -78,4 +78,8 @@ export const http = {
     });
     return res;
   },
+  deleteTodo: async (id: string) => {
+    const res = await api.delete(`/todos/delete-todos/${id}/`);
+    return res;
+  },
 };

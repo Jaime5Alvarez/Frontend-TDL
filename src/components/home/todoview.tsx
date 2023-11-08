@@ -44,6 +44,35 @@ export const TodoView = () => {
       completed: false,
     });
   };
+  const HandleDeleteTodo = async (id: string) => {
+    const Toastid = toast.loading("Loading...");
+    try {
+      const res = await http.deleteTodo(id);
+      setTodos((prevTodos) => {
+        return prevTodos.filter((todo) => todo.id != id);
+      });
+      toast.update(Toastid, {
+        render: res.data.message,
+        type: "success",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    } catch (e: unknown) {
+      const error = e as AxiosError<ErrorBody>;
+      const responseError = error.response?.data;
+      const errorMessage = responseError?.message || "An error occurred.";
+      toast.update(Toastid, {
+        render: errorMessage,
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    } finally {
+      setEditModal(false);
+    }
+  };
   const HandleSubmitEditTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const date = new Date(inputForm.Date).toISOString();
@@ -191,6 +220,13 @@ export const TodoView = () => {
               className="w-full mt-2 text-white bg-blue-800 hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
             >
               Save
+            </button>
+            <button
+              onClick={() => HandleDeleteTodo(inputForm.id)}
+              type="button"
+              className="w-full mt-2 text-white bg-red-800 hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+              Delete
             </button>
           </form>
         </Modal>
