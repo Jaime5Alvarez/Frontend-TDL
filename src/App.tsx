@@ -18,7 +18,7 @@ function App() {
         <nav className=" flex justify-center">
           <Header />
         </nav>
-        <main className="mt-20">
+        <main className="">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup />} />

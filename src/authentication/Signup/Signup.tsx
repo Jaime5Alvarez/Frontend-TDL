@@ -1,10 +1,10 @@
 import { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { Router, setNavigator } from "../../navigation/Router";
 import { useNavigate } from "react-router-dom";
-import { isAuth } from "../../utils/IsAuth";
 import { http } from "../../services/http/http";
+import { useRevokeToHome } from "../../components/hooks/useRevokeToHome";
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -62,12 +62,10 @@ export const Signup = () => {
       });
     }
   };
-  useEffect(() => {
-    isAuth() && Router.goToHome();
-  }, []);
+  useRevokeToHome();
   return (
     <>
-      <section className=" ">
+      <section className=" translate-y-20">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
           <div className="w-full bg-white rounded-lg drop-shadow-2xl   max-w-md ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

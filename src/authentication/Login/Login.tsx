@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Router, setNavigator } from "../../navigation/Router";
-import { isAuth } from "../../utils/IsAuth";
 import { http } from "../../services/http/http";
 import { AxiosError } from "axios";
+import { useRevokeToHome } from "../../components/hooks/useRevokeToHome";
 interface Errorbody {
   message: string;
 }
+
 export const Login = () => {
   const navigate = useNavigate();
   setNavigator(navigate);
@@ -62,12 +63,11 @@ export const Login = () => {
       console.log(err.response?.data);
     }
   };
-  useEffect(() => {
-    isAuth() && Router.goToHome();
-  }, []);
+  useRevokeToHome();
+
   return (
     <>
-      <section className="">
+      <section className="translate-y-20">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
           <div className="w-full bg-white rounded-lg drop-shadow-2xl  max-w-md   ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

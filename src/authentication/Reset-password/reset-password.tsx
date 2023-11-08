@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { http } from "../../services/http/http";
+import { useRevokeToHome } from "../../components/hooks/useRevokeToHome";
 
 export const ResetPasswordClient = () => {
   const [inputForm, setInputForm] = useState({
@@ -43,9 +44,10 @@ export const ResetPasswordClient = () => {
       });
     }
   };
+  useRevokeToHome();
   return (
     <>
-      <section className="">
+      <section className="translate-y-20">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
           <div className="w-full bg-white rounded-lg drop-shadow-2xl  max-w-md   ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
