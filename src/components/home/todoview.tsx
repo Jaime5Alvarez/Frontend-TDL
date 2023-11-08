@@ -77,7 +77,6 @@ export const TodoView = () => {
     const todoDate = new Date(todo.date);
     return todoDate.toDateString() === date.toDateString();
   });
-  console.log("render");
   return (
     <>
       {modal && (
