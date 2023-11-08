@@ -7,9 +7,10 @@ import { Modal } from "../modals/modal";
 import { http } from "../../services/http/http";
 import { AxiosError } from "axios";
 import { ErrorBody, Todos } from "../../models/models";
+import { LoadingSpinner } from "../gif/LoadingSpinner";
 
 export const TodoView = () => {
-  const { todos, setTodos } = useGetTodos();
+  const { todos, setTodos, loading } = useGetTodos();
 
   const [date, setDate] = useState(new Date());
   const [modal, setModal] = useState(false);
@@ -160,6 +161,16 @@ export const TodoView = () => {
     const todoDate = new Date(todo.date);
     return todoDate.toDateString() === date.toDateString();
   });
+
+  if (loading) {
+    return (
+      <>
+        <section className=" flex justify-center h-screen items-center  ">
+          <LoadingSpinner className="w-10 h-10" />
+        </section>
+      </>
+    );
+  }
   return (
     <>
       {editModal && (
