@@ -2,14 +2,18 @@ import { useState } from "react";
 
 import { useGetTodos } from "../hooks/getTodos";
 import { AddTodoIcon } from "../icons/AddTodo";
-
+import { toast } from "react-toastify";
 import { Modal } from "../modals/modal";
 import { http } from "../../services/http/http";
-
+import { AxiosError } from "axios";
+export type ErrorBody = {
+  message: string;
+};
 export const TodoView = () => {
+  const { todos, setTodos } = useGetTodos();
+
   const [date, setDate] = useState(new Date());
   const [modal, setModal] = useState(false);
-  const { todos, setTodos } = useGetTodos();
   const [inputForm, setInputForm] = useState({
     NewTask: "",
     Date: "",
@@ -29,10 +33,34 @@ export const TodoView = () => {
   };
   const HandleSubmitAddTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const title = inputForm.NewTask;
     const date = new Date(inputForm.Date).toISOString();
-    const res = await http.addTodo({ title, date });
-    setTodos((prev) => [...prev, res.todo]);
+    const Toastid = toast.loading("Loading...");
+    const title = inputForm.NewTask;
+
+    try {
+      const res = await http.addTodo({ title, date });
+      toast.update(Toastid, {
+        render: res.data.message,
+        type: "success",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+      setTodos((prev) => [...prev, res.data.todo]);
+    } catch (e: unknown) {
+      const error = e as AxiosError<ErrorBody>;
+      const responseError = error.response?.data;
+      const errorMessage = responseError?.message || "An error occurred.";
+      toast.update(Toastid, {
+        render: errorMessage,
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    } finally {
+      setModal(false);
+    }
   };
   const addDay = () => {
     const newDate = new Date(date);
@@ -49,7 +77,7 @@ export const TodoView = () => {
     const todoDate = new Date(todo.date);
     return todoDate.toDateString() === date.toDateString();
   });
-
+  console.log("render");
   return (
     <>
       {modal && (
@@ -137,7 +165,7 @@ export const TodoView = () => {
               filteredTodos.map((todo) => {
                 return (
                   <div key={todo.id}>
-                    <h5 className="bg-blue-800 duration-200 hover:opacity-90 ease-in-out text-sm cursor-pointer text-white flex justify-center  items-center py-1 rounded-full">
+                    <h5 className="bg-blue-800 mx-5 duration-200 hover:opacity-90 ease-in-out text-sm cursor-pointer text-white flex justify-center  items-center py-1 rounded-full">
                       {todo.title}
                     </h5>
                   </div>
