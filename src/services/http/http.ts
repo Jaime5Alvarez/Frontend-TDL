@@ -56,4 +56,8 @@ export const http = {
     const res = await api.get(`/todos/get-todos/`);
     return res.data;
   },
+  addTodo: async ({ title, date }: { title: string; date: string }) => {
+    const res = await api.post(`/todos/add-todos/`, { title, date });
+    return res.data;
+  },
 };

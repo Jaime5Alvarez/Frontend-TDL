@@ -1,13 +1,13 @@
+import { SetStateAction } from "react";
+
 export interface CrossIconprops {
-  close: React.Dispatch<React.SetStateAction<boolean>>;
+  close: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export const CrossIcon: React.FC<CrossIconprops> = ({ close }) => {
   return (
     <button
-      onClick={() => {
-        close((prev) => !prev);
-      }}
+      onClick={() => close((prev) => !prev)}
       type="button"
       className="absolute duration-200 ease-in-out right-2 top-1 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 ml-auto inline-flex justify-center items-center "
       data-modal-hide="defaultModal"

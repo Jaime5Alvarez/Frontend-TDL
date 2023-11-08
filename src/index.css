@@ -5,3 +5,15 @@
 html{
     background-color: rgb(37 99 235 ); 
 }
+/* Estilo para la barra de desplazamiento en navegadores WebKit */
+::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+    ;
+
+  }
+  
+  /* Estilo para el "pulgar" de la barra de desplazamiento en navegadores WebKit */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(37 99 235); /* Color del "pulgar" de la barra de desplazamiento */
+    border-radius: 10px; /* Borde redondeado del "pulgar" */
+  }

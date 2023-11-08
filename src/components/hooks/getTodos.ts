@@ -17,5 +17,5 @@ export const useGetTodos = () => {
     getTodos();
   }, []);
 
-  return { todos };
+  return { todos, setTodos };
 };
