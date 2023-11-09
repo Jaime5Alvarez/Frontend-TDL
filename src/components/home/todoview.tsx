@@ -41,7 +41,7 @@ export const TodoView = () => {
     setInputForm({
       id: "",
       NewTask: "",
-      Date: "",
+      Date: date.toISOString().split("T")[0],
       completed: false,
     });
   };
@@ -150,11 +150,19 @@ export const TodoView = () => {
     const newDate = new Date(date);
     newDate.setDate(date.getDate() + 1);
     setDate(newDate);
+    setInputForm({
+      ...inputForm,
+      Date: newDate.toISOString().split("T")[0],
+    });
   };
   const removeDay = () => {
     const newDate = new Date(date);
     newDate.setDate(date.getDate() - 1);
     setDate(newDate);
+    setInputForm({
+      ...inputForm,
+      Date: newDate.toISOString().split("T")[0],
+    });
   };
 
   const filteredTodos = todos.filter((todo) => {
