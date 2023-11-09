@@ -338,7 +338,7 @@ export const TodoView = () => {
                     <h5
                       onClick={() => HandleEditModal(todo)}
                       className={`bg-blue-800 mx-5 duration-200 hover:opacity-90 ease-in-out text-sm cursor-pointer text-white flex justify-center  items-center py-1 rounded-full ${
-                        todo.completed && "line-through "
+                        todo.completed && "line-through bg-gray-500 "
                       }`}
                     >
                       {todo.title}
