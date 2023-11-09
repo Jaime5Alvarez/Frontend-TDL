@@ -5,9 +5,7 @@ import { Router, setNavigator } from "../../navigation/Router";
 import { http } from "../../services/http/http";
 import { AxiosError } from "axios";
 import { useRevokeToHome } from "../../components/hooks/useRevokeToHome";
-interface Errorbody {
-  message: string;
-}
+import { ErrorBody } from "../../models/models";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -50,17 +48,17 @@ export const Login = () => {
         closeButton: true,
         isLoading: false,
       });
-    } catch (error) {
-      const e = error as AxiosError<Errorbody>;
+    } catch (e) {
+      const error = e as AxiosError<ErrorBody>;
+      const responseError = error.response?.data;
+      const errorMessage = responseError?.message || "An error occurred.";
       toast.update(Toastid, {
-        render: e.response?.data.message,
+        render: errorMessage,
         type: "error",
         autoClose: 5000,
         closeButton: true,
         isLoading: false,
       });
-      const err = error as AxiosError;
-      console.log(err.response?.data);
     }
   };
   useRevokeToHome();
