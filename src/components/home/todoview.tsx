@@ -8,6 +8,8 @@ import { http } from "../../services/http/http";
 import { AxiosError } from "axios";
 import { ErrorBody, Todos } from "../../models/models";
 import { LoadingSpinner } from "../gif/LoadingSpinner";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 export const TodoView = () => {
   const { todos, setTodos, loading } = useGetTodos();
@@ -164,7 +166,9 @@ export const TodoView = () => {
       Date: newDate.toISOString().split("T")[0],
     });
   };
-
+  const handleDateChange = (selectedDate: Date) => {
+    setDate(selectedDate);
+  };
   const filteredTodos = todos.filter((todo) => {
     const todoDate = new Date(todo.date);
     return todoDate.toDateString() === date.toDateString();
@@ -302,22 +306,21 @@ export const TodoView = () => {
 
       <section className=" flex justify-center translate-y-5 w-full ">
         <div className="bg-white drop-shadow-2xl translate-y-20 w-8/12 rounded-lg p-5 text-center  ">
-          <div className="flex justify-between items-center mb-3">
+          <DatePicker
+            selected={date}
+            todayButton="Today"
+            onChange={handleDateChange}
+            className={`${
+              date.toDateString() === new Date().toDateString() && "bg-gray-200"
+            } font-bold text-xl flex w-full justify-center text-center rounded-lg px-2 cursor-pointer mb-2 `}
+          />
+          <div className="flex justify-around items-center  mb-3">
             <button
               onClick={removeDay}
               className="bg-blue-800 rounded-full font-extrabold duration-200 hover:opacity-90 ease-in-out text-white px-3 py-1 "
             >
               -
             </button>
-
-            <h3
-              className={` ${
-                date.toDateString() === new Date().toDateString() &&
-                "bg-gray-200 "
-              } font-bold text-xl rounded-lg px-2 cursor-pointer  mb-2 `}
-            >
-              {date.toDateString()}
-            </h3>
 
             <button
               onClick={addDay}
