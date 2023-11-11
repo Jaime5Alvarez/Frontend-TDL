@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useGetTodos } from "../hooks/getTodos";
 import { AddTodoIcon } from "../icons/AddTodo";
 import { toast } from "react-toastify";
-import { Modal } from "../modals/modal";
 import { http } from "../../services/http/http";
 import { AxiosError } from "axios";
 import { ErrorBody, Todos } from "../../models/models";
 import { LoadingSpinner } from "../gif/LoadingSpinner";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import { ModalAddTask, ModalEditTask } from "../modals/modal";
 
 export const TodoView = () => {
   const { todos, setTodos, loading } = useGetTodos();
@@ -185,117 +185,24 @@ export const TodoView = () => {
   }
   return (
     <>
-      {editModal && (
-        <Modal setClose={setEditModal}>
-          {" "}
-          <form className="" onSubmit={HandleSubmitEditTask}>
-            <h3 className="text-blue-800 text-xl font-bold">EDIT A TASK</h3>
-            <hr />
-            <div className="mt-3">
-              <label className="block mb-2 text-sm font-medium text-gray-900 ">
-                Your new task
-              </label>
-              <input
-                onChange={handleChangeTaskForm}
-                value={inputForm.NewTask}
-                type="text"
-                name="NewTask"
-                placeholder="New task"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                required
-              />
-            </div>
-            <div className="mt-3">
-              <label className="block mb-2 text-sm font-medium text-gray-900 ">
-                Date
-              </label>
-              <input
-                onChange={handleChangeTaskForm}
-                value={inputForm.Date}
-                type="date"
-                name="Date"
-                placeholder="New date"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                required
-              />
-            </div>
-            <div className="flex items-start mt-2 mb-1">
-              <div className="flex items-center h-5">
-                <input
-                  id="remember"
-                  type="checkbox"
-                  checked={inputForm.completed} // Use 'checked' to determine the state of the checkbox
-                  onChange={(e) => {
-                    setInputForm({
-                      ...inputForm,
-                      completed: e.target.checked, // Update 'completed' based on the checkbox state
-                    });
-                  }}
-                  className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 "
-                />
-              </div>
-              <label className="ml-2 text-sm font-medium text-gray-900 ">
-                Completed
-              </label>
-            </div>
-            <button
-              type="submit"
-              className="w-full mt-2 text-white bg-blue-800 hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-            >
-              Save
-            </button>
-            <button
-              onClick={() => HandleDeleteTodo(inputForm.id)}
-              type="button"
-              className="w-full mt-2 text-white bg-red-800 hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            >
-              Delete
-            </button>
-          </form>
-        </Modal>
-      )}
-      {modal && (
-        <Modal setClose={setModal} onOpen={resetInputForm}>
-          <form className="" onSubmit={HandleSubmitAddTask}>
-            <h3 className="text-blue-800 text-xl font-bold">ADD A TASK</h3>
-            <hr />
-            <div className="mt-3">
-              <label className="block mb-2 text-sm font-medium text-gray-900 ">
-                Your new task
-              </label>
-              <input
-                onChange={handleChangeTaskForm}
-                value={inputForm.NewTask}
-                type="text"
-                name="NewTask"
-                placeholder="New task"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                required
-              />
-            </div>
-            <div className="mt-3">
-              <label className="block mb-2 text-sm font-medium text-gray-900 ">
-                Date
-              </label>
-              <input
-                onChange={handleChangeTaskForm}
-                value={inputForm.Date}
-                type="date"
-                name="Date"
-                placeholder="New date"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full mt-2 text-white bg-blue-800 hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-            >
-              Save
-            </button>
-          </form>
-        </Modal>
-      )}
+      <ModalEditTask
+        editModal={editModal}
+        HandleSubmitEditTask={HandleSubmitEditTask}
+        setEditModal={setEditModal}
+        handleChangeTaskForm={handleChangeTaskForm}
+        inputForm={inputForm}
+        HandleDeleteTodo={HandleDeleteTodo}
+        setInputForm={setInputForm}
+      />
+
+      <ModalAddTask
+        modal={modal}
+        resetInputForm={resetInputForm}
+        HandleSubmitAddTask={HandleSubmitAddTask}
+        setModal={setModal}
+        handleChangeTaskForm={handleChangeTaskForm}
+        inputForm={inputForm}
+      />
 
       <button
         onClick={() => setModal((prev) => !prev)}
@@ -307,6 +214,7 @@ export const TodoView = () => {
       <section className=" flex justify-center translate-y-5 w-full ">
         <div className="bg-white drop-shadow-2xl translate-y-20 w-8/12 rounded-lg p-5 text-center  ">
           <DatePicker
+            dateFormat="dd/MM/yyyy"
             selected={date}
             todayButton="Today"
             onChange={handleDateChange}
