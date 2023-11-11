@@ -44,7 +44,7 @@ export const Signup = () => {
 
       Router.goToLogin();
       toast.update(Toastid, {
-        render: "Trainer created, check your email",
+        render: "Account created, check your email",
         type: "success",
         autoClose: 5000,
         closeButton: true,
@@ -54,7 +54,7 @@ export const Signup = () => {
       const err = error as AxiosError;
       console.log(err.response?.data);
       toast.update(Toastid, {
-        render: "Error creating trainer account",
+        render: "Error creating the account",
         type: "error",
         autoClose: 5000,
         closeButton: true,
