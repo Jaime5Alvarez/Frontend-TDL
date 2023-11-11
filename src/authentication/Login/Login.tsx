@@ -1,15 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Router, setNavigator } from "../../navigation/Router";
+import { Router } from "../../navigation/Router";
 import { http } from "../../services/http/http";
 import { AxiosError } from "axios";
 import { useRevokeToHome } from "../../components/hooks/useRevokeToHome";
 import { ErrorBody } from "../../models/models";
 
 export const Login = () => {
-  const navigate = useNavigate();
-  setNavigator(navigate);
   const [inputForm, setInputForm] = useState({
     email: "",
     password: "",

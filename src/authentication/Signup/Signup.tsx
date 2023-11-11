@@ -1,14 +1,11 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Router, setNavigator } from "../../navigation/Router";
-import { useNavigate } from "react-router-dom";
+import { Router } from "../../navigation/Router";
 import { http } from "../../services/http/http";
 import { useRevokeToHome } from "../../components/hooks/useRevokeToHome";
 
 export const Signup = () => {
-  const navigate = useNavigate();
-  setNavigator(navigate);
   const [inputFormSignUp, setInputFormSignUp] = useState({
     name: "",
     last_name: "",
