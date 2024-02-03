@@ -87,7 +87,6 @@ export const ModalEditTask = ({
               name="description"
               placeholder="Description"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-              required
             />
           </div>
           <div className="mt-3">
@@ -187,7 +186,6 @@ export const ModalAddTask = ({
               name="description"
               placeholder="Description"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-              required
             />
           </div>
           <div className="mt-3">
