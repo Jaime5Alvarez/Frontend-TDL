@@ -20,6 +20,7 @@ export const TodoView = () => {
   const [inputForm, setInputForm] = useState({
     id: "",
     NewTask: "",
+    description:"",
     Date: "",
     completed: false,
   });
@@ -35,6 +36,7 @@ export const TodoView = () => {
     setInputForm({
       id: todo.id,
       NewTask: todo.title,
+      description: todo.description,
       Date: todo.date.split("T")[0],
       completed: todo.completed,
     });
@@ -43,6 +45,7 @@ export const TodoView = () => {
     setInputForm({
       id: "",
       NewTask: "",
+      description: "",
       Date: date.toISOString().split("T")[0],
       completed: false,
     });
@@ -82,10 +85,11 @@ export const TodoView = () => {
     const id = inputForm.id;
     const Toastid = toast.loading("Loading...");
     const title = inputForm.NewTask;
+    const description = inputForm.description
     const completed = inputForm.completed;
 
     try {
-      const res = await http.editTodo({ id, date, title, completed });
+      const res = await http.editTodo({ id, date, title, description, completed });
       setTodos((prevTodos) => {
         return prevTodos.map((todo) => {
           if (todo.id === id) {
@@ -122,9 +126,10 @@ export const TodoView = () => {
     const date = new Date(inputForm.Date).toISOString();
     const Toastid = toast.loading("Loading...");
     const title = inputForm.NewTask;
+    const description = inputForm.description
 
     try {
-      const res = await http.addTodo({ title, date });
+      const res = await http.addTodo({ title, description, date });
       toast.update(Toastid, {
         render: res.data.message,
         type: "success",

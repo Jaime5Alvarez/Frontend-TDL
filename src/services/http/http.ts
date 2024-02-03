@@ -56,23 +56,26 @@ export const http = {
     const res = await api.get(`/todos/get-todos/`);
     return res.data;
   },
-  addTodo: async ({ title, date }: { title: string; date: string }) => {
-    const res = await api.post(`/todos/add-todos/`, { title, date });
+  addTodo: async ({ title, description, date }: { title: string; description:string; date: string }) => {
+    const res = await api.post(`/todos/add-todos/`, { title, description, date });
     return res;
   },
   editTodo: async ({
     id,
     title,
+    description,
     date,
     completed,
   }: {
     id: string;
     title: string;
+    description:string;
     date: string;
     completed: boolean;
   }) => {
     const res = await api.put(`/todos/edit-todos/${id}/`, {
       title,
+      description,
       date,
       completed,
     });

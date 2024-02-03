@@ -10,6 +10,7 @@ interface ModalEditTaskProps {
   inputForm: {
     id: string;
     NewTask: string;
+    description:string;
     Date: string;
     completed: boolean;
   };
@@ -18,6 +19,7 @@ interface ModalEditTaskProps {
     React.SetStateAction<{
       id: string;
       NewTask: string;
+      description:string;
       Date: string;
       completed: boolean;
     }>
@@ -31,6 +33,7 @@ interface AddTaskDialogProps {
   inputForm: {
     id: string;
     NewTask: string;
+    description:string;
     Date: string;
     completed: boolean;
   };
@@ -69,6 +72,20 @@ export const ModalEditTask = ({
               type="text"
               name="NewTask"
               placeholder="New task"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+              required
+            />
+          </div>
+          <div className="mt-3">
+            <label className="block mb-2 text-sm font-medium text-gray-900 ">
+              Description
+            </label>
+            <input
+              onChange={handleChangeTaskForm}
+              value={inputForm.description}
+              type="text"
+              name="description"
+              placeholder="Description"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
               required
             />
@@ -155,6 +172,20 @@ export const ModalAddTask = ({
               type="text"
               name="NewTask"
               placeholder="New task"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+              required
+            />
+          </div>
+          <div className="mt-3">
+            <label className="block mb-2 text-sm font-medium text-gray-900 ">
+              Description
+            </label>
+            <input
+              onChange={handleChangeTaskForm}
+              value={inputForm.description}
+              type="text"
+              name="description"
+              placeholder="Description"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
               required
             />
