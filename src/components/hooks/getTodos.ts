@@ -3,7 +3,7 @@ import { Todos } from "../../models/models";
 import { http } from "../../services/http/http";
 
 export const useGetTodos = () => {
-  const [todos, setTodos] = useState<Todos[] | []>([]);
+  const [todos, setTodos] = useState<Todos[]>([]);
   const [loading, setLoading] = useState(false);
 
   const getTodos = async () => {

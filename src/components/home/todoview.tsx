@@ -11,6 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { ModalAddTask, ModalEditTask } from "../modals/modal";
 
+
 export const TodoView = () => {
   const { todos, setTodos, loading } = useGetTodos();
 
@@ -52,11 +53,14 @@ export const TodoView = () => {
   };
   const HandleDeleteTodo = async (id: string) => {
     const Toastid = toast.loading("Loading...");
+    const prevTodos = todos;
+
     try {
-      const res = await http.deleteTodo(id);
       setTodos((prevTodos) => {
         return prevTodos.filter((todo) => todo.id != id);
       });
+      setEditModal(false);
+      const res = await http.deleteTodo(id);
       toast.update(Toastid, {
         render: res.data.message,
         type: "success",
@@ -68,6 +72,8 @@ export const TodoView = () => {
       const error = e as AxiosError<ErrorBody>;
       const responseError = error.response?.data;
       const errorMessage = responseError?.message || "An error occurred.";
+      setTodos(prevTodos);
+
       toast.update(Toastid, {
         render: errorMessage,
         type: "error",
@@ -75,12 +81,12 @@ export const TodoView = () => {
         closeButton: true,
         isLoading: false,
       });
-    } finally {
-      setEditModal(false);
-    }
+    } 
+
   };
   const HandleSubmitEditTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const prevTodos = todos;
     const date = new Date(inputForm.Date).toISOString();
     const id = inputForm.id;
     const Toastid = toast.loading("Loading...");
@@ -89,6 +95,7 @@ export const TodoView = () => {
     const completed = inputForm.completed;
 
     try {
+      setEditModal(false);  
       const res = await http.editTodo({ id, date, title, description, completed });
       setTodos((prevTodos) => {
         return prevTodos.map((todo) => {
@@ -110,6 +117,7 @@ export const TodoView = () => {
       const error = e as AxiosError<ErrorBody>;
       const responseError = error.response?.data;
       const errorMessage = responseError?.message || "An error occurred.";
+      setTodos(prevTodos);
       toast.update(Toastid, {
         render: errorMessage,
         type: "error",
@@ -117,9 +125,7 @@ export const TodoView = () => {
         closeButton: true,
         isLoading: false,
       });
-    } finally {
-      setEditModal(false);
-    }
+    } 
   };
   const HandleSubmitAddTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -127,9 +133,13 @@ export const TodoView = () => {
     const Toastid = toast.loading("Loading...");
     const title = inputForm.NewTask;
     const description = inputForm.description
+    const prevTodos = todos
 
     try {
-      const res = await http.addTodo({ title, description, date });
+      const id = crypto.randomUUID();
+      setTodos((prev: Todos[]) => prev.concat({ id, title, description, date, completed: false }));
+      setModal(false);
+      const res = await http.addTodo({ id,title, description, date });
       toast.update(Toastid, {
         render: res.data.message,
         type: "success",
@@ -137,11 +147,11 @@ export const TodoView = () => {
         closeButton: true,
         isLoading: false,
       });
-      setTodos((prev) => [...prev, res.data.todo]);
     } catch (e: unknown) {
       const error = e as AxiosError<ErrorBody>;
       const responseError = error.response?.data;
       const errorMessage = responseError?.message || "An error occurred.";
+      setTodos(prevTodos);
       toast.update(Toastid, {
         render: errorMessage,
         type: "error",
@@ -149,8 +159,6 @@ export const TodoView = () => {
         closeButton: true,
         isLoading: false,
       });
-    } finally {
-      setModal(false);
     }
   };
   const addDay = () => {
