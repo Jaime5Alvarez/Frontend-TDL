@@ -1,7 +1,6 @@
 import { PrimaryButton } from "../../buttons/PrimaryButton";
 import { Router } from "../../../navigation/Router";
 import { SecondaryButton } from "../../buttons/SecondaryButton";
-import Logo from "../../../assets/VIRTUS_transparentazo-removebg-preview.png";
 import { isAuth } from "../../../utils/IsAuth";
 export const Header = () => {
   return (
@@ -14,7 +13,6 @@ export const Header = () => {
             onClick={() => Router.goToHome()}
             className="font-bold text-lg ml-2 cursor-pointer text-blue-800 max-w-md px-2 py-1 "
           >
-            <img alt="Virtus Logo" src={Logo} className="w-20  " />{" "}
           </div>
         </div>
         {isAuth() ? (
