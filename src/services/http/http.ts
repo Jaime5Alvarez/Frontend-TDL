@@ -13,6 +13,12 @@ export const http = {
     });
     return response.data;
   },
+  googleOAuth: async (access_token: string) => {
+    const response = await axios.post(`${URLS.BACKEND}/user/google-oauth/`, {
+      access_token: access_token,
+    });
+    return response.data;
+  },
   VerifyEmail: async (token: string | null) => {
     await axios.post(`${URLS.BACKEND}/user/email-verify/`, {
       token: token,
@@ -56,8 +62,23 @@ export const http = {
     const res = await api.get(`/todos/get-todos/`);
     return res.data;
   },
-  addTodo: async ({ id,title, description, date }: { id:string, title: string; description:string; date: string }) => {
-    const res = await api.post(`/todos/add-todos/`, { id, title, description, date });
+  addTodo: async ({
+    id,
+    title,
+    description,
+    date,
+  }: {
+    id: string;
+    title: string;
+    description: string;
+    date: string;
+  }) => {
+    const res = await api.post(`/todos/add-todos/`, {
+      id,
+      title,
+      description,
+      date,
+    });
     return res;
   },
   editTodo: async ({
@@ -69,7 +90,7 @@ export const http = {
   }: {
     id: string;
     title: string;
-    description:string;
+    description: string;
     date: string;
     completed: boolean;
   }) => {

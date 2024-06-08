@@ -5,6 +5,7 @@ import { http } from "../../services/http/http";
 import { AxiosError } from "axios";
 import { useRevokeToHome } from "../../components/hooks/useRevokeToHome";
 import { ErrorBody } from "../../models/models";
+import { GoogleLogin } from "@react-oauth/google";
 
 export const Login = () => {
   const [inputForm, setInputForm] = useState({
@@ -18,12 +19,41 @@ export const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
+  const handleGoogleOAuth = async (access_token: string) => {
+    const Toastid = toast.loading("Loading...");
+    try {
+      const response = await http.googleOAuth(access_token);
+      localStorage.clear();
+      window.localStorage.setItem("access_token", response.access);
+      window.localStorage.setItem("refresh_token", response.refresh);
+      Router.goToHome();
+      toast.update(Toastid, {
+        render: "Welcome!",
+        type: "success",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    } catch (e) {
+      const error = e as AxiosError<ErrorBody>;
+      const responseError = error.response?.data;
+      const errorMessage = responseError?.message || "An error occurred.";
+      toast.update(Toastid, {
+        render: errorMessage,
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    }
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!inputForm.email || !inputForm.password) {
       return;
     }
+
     const Toastid = toast.loading("Loading...");
 
     try {
@@ -69,6 +99,18 @@ export const Login = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight  text-blue-800 md:text-2xl ">
                 Login at your To-Do-List account
               </h1>
+              <div className="w-full flex justify-center">
+                <GoogleLogin
+                  theme="outline"
+                  onSuccess={async (credentialResponse) => {
+                    credentialResponse.credential &&
+                      handleGoogleOAuth(credentialResponse.credential);
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                />
+              </div>
               <form className="space-y-4 " onSubmit={handleSubmit}>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 ">
@@ -94,6 +136,7 @@ export const Login = () => {
                     value={inputForm.password}
                     type="password"
                     name="password"
+                    autoComplete="current-password"
                     id="password"
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "

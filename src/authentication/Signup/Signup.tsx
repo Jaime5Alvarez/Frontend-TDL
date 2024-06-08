@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { Router } from "../../navigation/Router";
 import { http } from "../../services/http/http";
 import { useRevokeToHome } from "../../components/hooks/useRevokeToHome";
+import { GoogleLogin } from "@react-oauth/google";
+import { ErrorBody } from "../../models/models";
 
 export const Signup = () => {
   const [inputFormSignUp, setInputFormSignUp] = useState({
@@ -59,6 +61,34 @@ export const Signup = () => {
       });
     }
   };
+  const handleGoogleOAuth = async (access_token: string) => {
+    const Toastid = toast.loading("Loading...");
+    try {
+      const response = await http.googleOAuth(access_token);
+      localStorage.clear();
+      window.localStorage.setItem("access_token", response.access);
+      window.localStorage.setItem("refresh_token", response.refresh);
+      Router.goToHome();
+      toast.update(Toastid, {
+        render: "Welcome!",
+        type: "success",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    } catch (e) {
+      const error = e as AxiosError<ErrorBody>;
+      const responseError = error.response?.data;
+      const errorMessage = responseError?.message || "An error occurred.";
+      toast.update(Toastid, {
+        render: errorMessage,
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    }
+  };
   useRevokeToHome();
   return (
     <>
@@ -69,6 +99,18 @@ export const Signup = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-blue-800 md:text-2xl ">
                 Create a To-Do account
               </h1>
+              <div className="w-full flex justify-center">
+                <GoogleLogin
+                  theme="outline"
+                  onSuccess={async (credentialResponse) => {
+                    credentialResponse.credential &&
+                      handleGoogleOAuth(credentialResponse.credential);
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                />
+              </div>
               <form
                 className="space-y-4 md:space-y-6"
                 onSubmit={handleSubmitSignUp}
