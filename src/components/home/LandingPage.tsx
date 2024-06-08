@@ -10,7 +10,7 @@ export const LandingPage = () => {
               <h1 className="text-xl text-center font-bold leading-tight tracking-tight  text-blue-800 md:text-2xl ">
                 Welcome to{" "}
                 <span className="bg-blue-900 text-white rounded-xl px-1 py-1">
-                  TO-DO-APP
+                  TO-DO-LIST-APP
                 </span>
               </h1>
             </div>

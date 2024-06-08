@@ -97,7 +97,7 @@ export const Signup = () => {
           <div className="w-full bg-white rounded-lg drop-shadow-2xl   max-w-md ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-blue-800 md:text-2xl ">
-                Create a To-Do account
+                Create a To-Do-List account
               </h1>
               <div className="w-full flex justify-center">
                 <GoogleLogin
