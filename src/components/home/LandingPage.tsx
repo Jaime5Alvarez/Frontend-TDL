@@ -1,3 +1,5 @@
+import { Login } from "../../authentication/Login/Login";
+
 export const LandingPage = () => {
   return (
     <>
@@ -15,6 +17,9 @@ export const LandingPage = () => {
           </div>
         </div>
       </section>
+      <div className="-translate-y-10">
+      <Login/>
+      </div>
     </>
   );
 };
