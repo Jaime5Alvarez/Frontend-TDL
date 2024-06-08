@@ -69,7 +69,7 @@ export const Login = () => {
       Router.goToHome();
 
       toast.update(Toastid, {
-        render: "Login successfull",
+        render: "Welcome!",
         type: "success",
         autoClose: 5000,
         closeButton: true,
